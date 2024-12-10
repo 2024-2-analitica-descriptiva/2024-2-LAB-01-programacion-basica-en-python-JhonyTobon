@@ -6,7 +6,7 @@ utilizar pandas, numpy o scipy.
 """
 
 def pregunta_01():
-    lista_lineas = open("files\\input\\data.csv", "r").readlines()
+    lista_lineas = open("files/input/data.csv", "r").readlines()
     lista_sin_salto = [line.replace("\n","") for line in lista_lineas]
     lista_de_listas = [str.split("\t") for str in lista_sin_salto]
     lista_de_listas = sum(int(lista_de_listas[1]) for lista_de_listas in lista_de_listas)
