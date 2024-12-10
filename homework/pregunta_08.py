@@ -4,9 +4,28 @@ datos requeridos se encuentran en el archivo data.csv. En este laboratorio
 solo puede utilizar las funciones y librerias basicas de python. No puede
 utilizar pandas, numpy o scipy.
 """
-
+from itertools import groupby
 
 def pregunta_08():
+
+    #Leer y limpiar la data
+    open_data = open('files/input/data.csv','r').readlines()
+    open_data = [z.replace('\n','')for z in open_data]
+    clean_list = [z.split('\t')for z in open_data]
+    #Separar la data para operar
+    data_list = [(line[0],line[1]) for line in clean_list]
+    #Organizar las tuplas por la columna 1
+    data_sorted = sorted(data_list, key=lambda x: x[1])
+    #Agrupar, crear la lista y retornar la pregunta 07
+    grouped = groupby(data_sorted, key=lambda x: x[1])
+    list_independent = []
+    for key, group in grouped:
+    # Usamos un set para evitar duplicados
+        letras = set(letra for letra, value in group)
+    #Conversiones a enter y a lista ordenada
+        list_independent.append((int(key), sorted(list(letras))))
+    
+    return list_independent
     """
     Genere una lista de tuplas, donde el primer elemento de cada tupla
     contiene  el valor de la segunda columna; la segunda parte de la tupla

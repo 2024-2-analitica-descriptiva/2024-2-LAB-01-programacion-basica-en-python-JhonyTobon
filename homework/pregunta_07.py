@@ -7,7 +7,27 @@ utilizar pandas, numpy o scipy.
 
 
 def pregunta_07():
-    """
+    from itertools import groupby
+    #Leer y limpiar la data
+    open_data = open('files/input/data.csv','r').readlines()
+    open_data = [z.replace('\n','')for z in open_data]
+    clean_list = [z.split('\t')for z in open_data]
+    #Separar la data para operar
+    data_list = [(line[0],line[1]) for line in clean_list]
+    #Organizar las tuplas por la columna 1
+    data_sorted = sorted(data_list, key=lambda x: x[1])
+    #Agrupar, crear la lista y retornar la pregunta 07
+    grouped = groupby(data_sorted, key=lambda x: x[1])
+    list_number_key = []
+    for key, group in grouped:
+        letras = [letra for letra, value in group]
+        list_number_key.append((int(key), letras))
+    
+    return list_number_key
+
+
+
+"""
     Retorne una lista de tuplas que asocien las columnas 0 y 1. Cada tupla
     contiene un valor posible de la columna 2 y una lista con todas las letras
     asociadas (columna 1) a dicho valor de la columna 2.
